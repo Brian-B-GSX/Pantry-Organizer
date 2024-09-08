@@ -9,11 +9,17 @@ function addItem() {
     let dateAdded = document.getElementById('date_added').value;
     let expirationDate = document.getElementById('expiration_date').value;
 
+    // Create a new row object
     let newRow = [location, shelf, item, quantity, dateAdded, expirationDate];
-    console.log('New Item:', newRow);  // Debugging statement to check if items are being added
 
+    // Add the row to the data array
     pantryData.push(newRow);
-    updateTable();
+
+    // Call function to render the table
+    renderTable();
+
+    // Optionally, clear the form
+    document.getElementById('pantry-form').reset();
 }
 
 // Update table with current pantry data
@@ -28,6 +34,25 @@ function updateTable() {
             td.textContent = cellData || '';  // Make sure empty values are handled
             tr.appendChild(td);
         });
+        tbody.appendChild(tr);
+    });
+}
+
+function renderTable() {
+    let tbody = document.querySelector("#pantry-table tbody");
+    tbody.innerHTML = "";  // Clear existing rows
+
+    pantryData.forEach(row => {
+        let tr = document.createElement('tr');  // Create a new table row
+
+        // Loop through the row's data and create a table cell for each piece of data
+        row.forEach(cellData => {
+            let td = document.createElement('td');
+            td.textContent = cellData || '';  // Fill in the cell with data
+            tr.appendChild(td);  // Add the cell to the row
+        });
+
+        // Append the new row to the table body
         tbody.appendChild(tr);
     });
 }
