@@ -10,6 +10,8 @@ function addItem() {
     let expirationDate = document.getElementById('expiration_date').value;
 
     let newRow = [location, shelf, item, quantity, dateAdded, expirationDate];
+    console.log('New Item:', newRow);  // Debugging statement to check if items are being added
+
     pantryData.push(newRow);
     updateTable();
 }
@@ -23,7 +25,7 @@ function updateTable() {
         let tr = document.createElement('tr');
         row.forEach(cellData => {
             let td = document.createElement('td');
-            td.textContent = cellData;
+            td.textContent = cellData || '';  // Make sure empty values are handled
             tr.appendChild(td);
         });
         tbody.appendChild(tr);
@@ -32,9 +34,8 @@ function updateTable() {
 
 // Export pantry data to CSV
 function exportCSV() {
+    console.log('Pantry Data:', pantryData);  // Debugging statement
     let csvContent = "data:text/csv;charset=utf-8,";
-
-    // Add column headers
     csvContent += "Location,Shelf,Item,Quantity,Date Added,Expiration Date\n";
 
     pantryData.forEach(row => {
