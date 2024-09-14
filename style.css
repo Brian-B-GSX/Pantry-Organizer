@@ -1,8 +1,10 @@
 /* General Styling */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     background-color: #f7f9fc;
-    color: #333;
+    color: #2c3e50; /* Darker, modern color */
     margin: 0;
     padding: 0;
     display: flex;
@@ -13,9 +15,9 @@ body {
 }
 
 h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: #333;
+    font-size: 4rem; /* Larger for a sleek look */
+    font-weight: 600; /* Lighter weight for modern typography */
+    color: #2c3e50;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -34,13 +36,13 @@ main {
 }
 
 #form-section {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Popout shadow effect */
-    width: 40%;
+    background-color: #ffffff;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    width: 35%; /* Slightly narrower for a more balanced look */
     position: relative;
-    top: 5%;
+    top: 8%; /* Adjusted for better positioning */
 }
 
 form {
@@ -52,16 +54,17 @@ form {
 
 label {
     font-weight: bold;
-    font-size: 1.1rem;
-    color: #555;
+    font-size: 1rem; /* Modern and slightly smaller */
+    color: #34495e; /* Slightly darker for contrast */
 }
 
 input, select, button {
-    padding: 12px;
-    font-size: 1rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    padding: 15px;
+    font-size: 1.05rem;
+    border-radius: 10px; /* Rounder corners */
+    border: 1px solid #ddd; /* Subtle border */
     width: 100%;
+    transition: border-color 0.3s ease
 }
 
 button {
@@ -144,3 +147,4 @@ button[type="button"]:hover {
         font-size: 2.5rem;
     }
 }
+
