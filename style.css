@@ -1,50 +1,146 @@
-/* General page styling */
+/* General Styling */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
     margin: 0;
-    padding: 20px;
-    background-color: #f4f4f4;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
 }
 
 h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #333;
     text-align: center;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+}
+
+/* Center the form section in the middle of the page */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#form-section {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Popout shadow effect */
+    width: 40%;
+    position: relative;
+    top: 5%;
 }
 
 form {
-    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    width: 100%;
 }
 
 label {
-    display: block;
-    margin: 10px 0 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #555;
 }
 
-input, button {
-    padding: 8px;
-    margin-right: 10px;
+input, select, button {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    width: 100%;
 }
 
 button {
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
-    border: none;
     cursor: pointer;
+    border: none;
+    transition: background-color 0.3s ease;
+    width: 100%;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
+}
+
+/* Divider Styling */
+.divider {
+    width: 60%;
+    margin: 40px 0;
+    border: none;
+    border-top: 2px solid #007bff;
+}
+
+/* Table Section */
+#table-section {
+    width: 80%;
+    margin-top: 30px;
+    position: absolute;
+    bottom: 10%;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid black;
+    margin-bottom: 20px;
 }
 
 th, td {
-    padding: 8px;
     text-align: left;
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Button for Export and Clear */
+button[type="button"] {
+    margin-top: 10px;
+    padding: 12px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    #form-section {
+        width: 80%;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
 }

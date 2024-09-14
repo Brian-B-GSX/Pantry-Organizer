@@ -3,54 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pantry Organizer</title>
+    <title>SmartShelf</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Pantry Organizer</h1>
+    <header>
+        <h1>SmartShelf</h1>
+    </header>
 
-    <form id="pantry-form">
-        <label>Location:</label>
-        <input type="text" id="location">
-        
-        <label>Shelf:</label>
-        <input type="text" id="shelf">
-        
-        <label>Item:</label>
-        <input type="text" id="item">
-        
-        <label>Quantity:</label>
-        <input type="number" id="quantity">
-        
-        <label>Date Added:</label>
-        <input type="date" id="date_added">
-        
-        <label>Expiration Date:</label>
-        <input type="date" id="expiration_date">
-        
-        <button type="button" onclick="addItem()">Add Item</button>
-    </form>
+    <main>
+        <!-- Spacing after title -->
+        <div id="spacer"></div>
 
-    <button onclick="exportCSV()">Export to CSV</button>
-    <input type="file" id="file-upload" accept=".csv" onchange="importCSV(event)">
+        <!-- Item Entry Form -->
+        <section id="form-section">
+            <form id="item-form">
+                <label for="unit">Primary Unit:</label>
+                <select id="unit">
+                    <option value="Fridge">Fridge</option>
+                    <option value="Cabinet">Cabinet</option>
+                    <option value="Pantry">Pantry</option>
+                    <option value="Drawer">Drawer</option>
+                </select>
+
+                <label for="shelf">Shelf:</label>
+                <input type="text" id="shelf" placeholder="Enter shelf location">
+
+                <label for="item">Item:</label>
+                <input type="text" id="item" placeholder="Enter item name">
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" placeholder="Enter quantity">
+
+                <label for="dateAdded">Date Added:</label>
+                <input type="date" id="dateAdded">
+
+                <label for="expirationDate">Expiration Date:</label>
+                <input type="date" id="expirationDate">
+
+                <button type="button" onclick="addItem()">Add Item</button>
+            </form>
+        </section>
+
+        <!-- Clear Divider -->
+        <hr class="divider">
+
+        <!-- Table Section -->
+        <section id="table-section">
+            <div id="table-container"></div>
+        </section>
+    </main>
+
+    <!-- File Input for Import -->
+    <input type="file" id="import-file" accept=".csv" onchange="importFromCSV(event)">
+    <button onclick="exportToCSV()">Export to CSV</button>
     <button onclick="clearTable()">Clear Table</button>
 
-    <table id="pantry-table">
-        <thead>
-            <tr>
-                <th>Location</th>
-                <th>Shelf</th>
-                <th>Item</th>
-                <th>Quantity</th>
-                <th>Date Added</th>
-                <th>Expiration Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Rows will be dynamically inserted here -->
-        </tbody>
-    </table>
-
-    <script src="organize_script.js"></script> <!-- Link to your JavaScript file -->
+    <script src="script.js"></script>
 </body>
 </html>
