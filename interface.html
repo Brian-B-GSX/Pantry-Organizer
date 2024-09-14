@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartShelf</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css"> <!-- Path to the CSS file -->
 </head>
 <body>
     <header>
@@ -12,10 +12,6 @@
     </header>
 
     <main>
-        <!-- Spacing after title -->
-        <div id="spacer"></div>
-
-        <!-- Item Entry Form -->
         <section id="form-section">
             <form id="item-form">
                 <label for="unit">Primary Unit:</label>
@@ -45,20 +41,19 @@
             </form>
         </section>
 
-        <!-- Clear Divider -->
         <hr class="divider">
 
-        <!-- Table Section -->
         <section id="table-section">
             <div id="table-container"></div>
         </section>
+
+        <div id="bottom-buttons">
+            <input type="file" id="import-file" accept=".csv" onchange="importFromCSV(event)">
+            <button onclick="exportToCSV()">Export to CSV</button>
+            <button onclick="clearTable()">Clear Table</button>
+        </div>
     </main>
 
-    <!-- File Input for Import -->
-    <input type="file" id="import-file" accept=".csv" onchange="importFromCSV(event)">
-    <button onclick="exportToCSV()">Export to CSV</button>
-    <button onclick="clearTable()">Clear Table</button>
-
-    <script src="script.js"></script>
+    <script src="organize_script.js"></script>
 </body>
 </html>

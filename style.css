@@ -1,136 +1,143 @@
 /* General Styling */
 body {
     font-family: 'Poppins', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     background-color: #f7f9fc;
-    color: #2c3e50; /* Darker, modern color */
+    color: #2c3e50;
     margin: 0;
     padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
+    box-sizing: border-box; /* Ensure padding and border are included in the width */
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+header {
+    text-align: center;
+    padding: 1rem;
 }
 
 h1 {
-    font-size: 4rem; /* Larger for a sleek look */
-    font-weight: 600; /* Lighter weight for modern typography */
+    font-size: 4rem;
+    font-weight: 600;
     color: #2c3e50;
-    text-align: center;
     margin: 0;
-    padding: 0;
-    position: absolute;
-    top: 10%;
-    width: 100%;
 }
 
-/* Center the form section in the middle of the page */
+/* Center the form section */
 main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    height: calc(100vh - 50px); /* Adjust height to account for header */
+    padding: 0 10px; /* Add padding to prevent content from touching edges */
 }
 
 #form-section {
     background-color: #ffffff;
-    padding: 50px;
+    padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1); /* Softer shadow */
-    width: 35%; /* Slightly narrower for a more balanced look */
-    position: relative;
-    top: 8%; /* Adjusted for better positioning */
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px; /* Limit the maximum width */
+    margin: 20px auto;
+    display: grid;
+    gap: 15px;
 }
 
 form {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 20px;
-    width: 100%;
 }
 
 label {
     font-weight: bold;
-    font-size: 1rem; /* Modern and slightly smaller */
-    color: #34495e; /* Slightly darker for contrast */
+    font-size: 1rem;
+    color: #34495e;
 }
 
-input, select, button {
-    padding: 15px;
-    font-size: 1.05rem;
-    border-radius: 10px; /* Rounder corners */
-    border: 1px solid #ddd; /* Subtle border */
+input, select {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 1px solid #ddd;
     width: 100%;
-    transition: border-color 0.3s ease
+    box-sizing: border-box; /* Include padding and border in width */
+}
+
+input:focus, select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
 }
 
 button {
-    background-color: #007bff;
+    padding: 15px;
+    font-size: 1.05rem;
+    border-radius: 10px;
+    background-color: #1abc9c;
     color: white;
     cursor: pointer;
     border: none;
-    transition: background-color 0.3s ease;
     width: 100%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #16a085;
+    transform: scale(1.02);
 }
 
-/* Divider Styling */
-.divider {
-    width: 60%;
-    margin: 40px 0;
-    border: none;
-    border-top: 2px solid #007bff;
+/* Move buttons to the bottom */
+#bottom-buttons {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    background-color: #ffffff; /* Match background color with the form section */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Table Section */
 #table-section {
-    width: 80%;
+    width: 100%;
     margin-top: 30px;
-    position: absolute;
-    bottom: 10%;
+    display: flex;
+    justify-content: center;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
 }
 
 th, td {
     text-align: left;
-    padding: 12px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
+    padding: 15px;
+    border: none;
+    font-size: 1.05rem;
 }
 
 th {
-    background-color: #f0f0f0;
-    font-weight: bold;
+    background-color: #ecf0f1;
+    font-weight: 600;
+    color: #2c3e50;
 }
 
 tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-/* Button for Export and Clear */
-button[type="button"] {
-    margin-top: 10px;
-    padding: 12px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-}
-
-button[type="button"]:hover {
-    background-color: #0056b3;
+tr:hover {
+    background-color: #eaf2f8;
 }
 
 /* Responsive Styling */
@@ -140,11 +147,12 @@ button[type="button"]:hover {
     }
 
     #form-section {
-        width: 80%;
+        width: 100%;
+        padding: 30px;
+        max-width: none; /* Remove max-width for smaller screens */
     }
 
     h1 {
-        font-size: 2.5rem;
+        font-size: 2.8rem;
     }
 }
-
