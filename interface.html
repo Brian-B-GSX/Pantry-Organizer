@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartShelf</title>
-    <link rel="stylesheet" href="style.css"> <!-- Path to the CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -12,6 +12,7 @@
     </header>
 
     <main>
+        <!-- Form Section -->
         <section id="form-section">
             <form id="item-form">
                 <label for="unit">Primary Unit:</label>
@@ -41,12 +42,29 @@
             </form>
         </section>
 
+        <!-- Search and Filter Section -->
+        <section id="filter-section">
+            <label for="search">Search by Item:</label>
+            <input type="text" id="search" placeholder="Search item..." onkeyup="filterItems()">
+
+            <label for="unitFilter">Filter by Unit:</label>
+            <select id="unitFilter" onchange="filterItems()">
+                <option value="all">All Units</option>
+                <option value="Fridge">Fridge</option>
+                <option value="Cabinet">Cabinet</option>
+                <option value="Pantry">Pantry</option>
+                <option value="Drawer">Drawer</option>
+            </select>
+        </section>
+
         <hr class="divider">
 
+        <!-- Table Section -->
         <section id="table-section">
             <div id="table-container"></div>
         </section>
 
+        <!-- Bottom Buttons -->
         <div id="bottom-buttons">
             <input type="file" id="import-file" accept=".csv" onchange="importFromCSV(event)">
             <button onclick="exportToCSV()">Export to CSV</button>

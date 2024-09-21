@@ -1,120 +1,120 @@
-let pantryData = {};
+// Array to hold all items
+let items = [];
 
+// Add item to the table and list
 function addItem() {
-    let primaryUnit = document.getElementById('primary_unit').value;
-    let location = document.getElementById('location').value;
-    let shelf = document.getElementById('shelf').value;
-    let item = document.getElementById('item').value;
-    let quantity = document.getElementById('quantity').value;
-    let dateAdded = document.getElementById('date_added').value;
-    let expirationDate = document.getElementById('expiration_date').value;
+    const unit = document.getElementById('unit').value;
+    const shelf = document.getElementById('shelf').value;
+    const item = document.getElementById('item').value;
+    const quantity = document.getElementById('quantity').value;
+    const dateAdded = document.getElementById('dateAdded').value;
+    const expirationDate = document.getElementById('expirationDate').value;
 
-    let newRow = [location, shelf, item, quantity, dateAdded, expirationDate];
+    if (unit && shelf && item && quantity && dateAdded && expirationDate) {
+        const newItem = {
+            unit,
+            shelf,
+            item,
+            quantity,
+            dateAdded,
+            expirationDate
+        };
 
-    if (!pantryData[primaryUnit]) {
-        pantryData[primaryUnit] = [];
-    }
-
-    pantryData[primaryUnit].push(newRow);
-    renderTable();
-    document.getElementById('pantry-form').reset();
-}
-
-function renderTable() {
-    let tableContainer = document.getElementById('table-container');
-    tableContainer.innerHTML = '';  
-
-    for (let unit in pantryData) {
-        let section = document.createElement('div');
-        section.classList.add('primary-unit-section');
-
-        let header = document.createElement('h3');
-        header.textContent = unit;
-        section.appendChild(header);
-
-        let table = document.createElement('table');
-        table.classList.add('pantry-table');
-        let thead = document.createElement('thead');
-        let headerRow = document.createElement('tr');
-
-        ['Location', 'Shelf', 'Item', 'Quantity', 'Date Added', 'Expiration Date'].forEach(col => {
-            let th = document.createElement('th');
-            th.textContent = col;
-            headerRow.appendChild(th);
-        });
-
-        thead.appendChild(headerRow);
-        table.appendChild(thead);
-
-        let tbody = document.createElement('tbody');
-        pantryData[unit].forEach((row, rowIndex) => {
-            let tr = document.createElement('tr');
-            row.forEach((cellData, cellIndex) => {
-                let td = document.createElement('td');
-                td.textContent = cellData || '';
-                td.contentEditable = true;  
-                td.addEventListener('blur', () => {
-                    pantryData[unit][rowIndex][cellIndex] = td.textContent;
-                });
-                tr.appendChild(td);
-            });
-            tbody.appendChild(tr);
-        });
-
-        table.appendChild(tbody);
-        section.appendChild(table);
-        tableContainer.appendChild(section);
+        items.push(newItem);
+        displayItems(items);
+    } else {
+        alert("Please fill in all fields");
     }
 }
 
-function exportToCSV() {
-    let csvContent = "data:text/csv;charset=utf-8,";
+// Display items in the table
+function displayItems(filteredItems) {
+    const tableContainer = document.getElementById('table-container');
+    if (filteredItems.length === 0) {
+        tableContainer.innerHTML = '<p>No items to display.</p>';
+        return;
+    }
 
-    Object.keys(pantryData).forEach(unit => {
-        csvContent += unit + "\n";
-        csvContent += "Location,Shelf,Item,Quantity,Date Added,Expiration Date\n";
+    let tableHTML = '<table>';
+    tableHTML += `
+        <tr>
+            <th>Unit</th>
+            <th>Shelf</th>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Date Added</th>
+            <th>Expiration Date</th>
+        </tr>
+    `;
 
-        pantryData[unit].forEach(row => {
-            csvContent += row.join(",") + "\n";
-        });
-
-        csvContent += "\n"; 
+    filteredItems.forEach((item) => {
+        tableHTML += `
+            <tr>
+                <td>${item.unit}</td>
+                <td>${item.shelf}</td>
+                <td>${item.item}</td>
+                <td>${item.quantity}</td>
+                <td>${item.dateAdded}</td>
+                <td>${item.expirationDate}</td>
+            </tr>
+        `;
     });
 
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "pantry_data.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    tableHTML += '</table>';
+    tableContainer.innerHTML = tableHTML;
 }
 
+// Clear the table and items
+function clearTable() {
+    items = [];
+    displayItems(items);
+}
+
+// Search and filter items
+function filterItems() {
+    const searchQuery = document.getElementById('search').value.toLowerCase();
+    const unitFilter = document.getElementById('unitFilter').value;
+
+    const filteredItems = items.filter((item) => {
+        const matchesSearch = item.item.toLowerCase().includes(searchQuery);
+        const matchesUnit = unitFilter === 'all' || item.unit === unitFilter;
+
+        return matchesSearch && matchesUnit;
+    });
+
+    displayItems(filteredItems);
+}
+
+// CSV Export
+function exportToCSV() {
+    const csvContent = items.map(item => 
+        `${item.unit},${item.shelf},${item.item},${item.quantity},${item.dateAdded},${item.expirationDate}`
+    ).join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'smartshelf_items.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// CSV Import
 function importFromCSV(event) {
     const file = event.target.files[0];
     const reader = new FileReader();
 
     reader.onload = function(e) {
-        const text = e.target.result;
-        const rows = text.split("\n").map(row => row.split(","));
-        
-        let currentUnit = "";
-        rows.forEach((row) => {
-            if (row.length === 1 && row[0]) {
-                currentUnit = row[0];
-                pantryData[currentUnit] = [];
-            } else if (row.length === 6 && currentUnit) {
-                pantryData[currentUnit].push(row);
-            }
+        const lines = e.target.result.split('\n');
+        items = lines.map(line => {
+            const [unit, shelf, item, quantity, dateAdded, expirationDate] = line.split(',');
+            return { unit, shelf, item, quantity, dateAdded, expirationDate };
         });
-
-        renderTable();  
+        displayItems(items);
     };
 
     reader.readAsText(file);
-}
-
-function clearTable() {
-    pantryData = {};  
-    renderTable();    
 }
