@@ -22,6 +22,7 @@ function addItem() {
 
         items.push(newItem);
         displayItems(items);
+        checkForExpiringItems();
     } else {
         alert("Please fill in all fields");
     }
@@ -64,10 +65,32 @@ function displayItems(filteredItems) {
     tableContainer.innerHTML = tableHTML;
 }
 
+// Check for items expiring within 3 days and display alerts
+function checkForExpiringItems() {
+    const alertsContainer = document.getElementById('alerts-container');
+    alertsContainer.innerHTML = ''; // Clear previous alerts
+
+    const today = new Date();
+
+    items.forEach(item => {
+        const expDate = new Date(item.expirationDate);
+        const diffTime = expDate - today;
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays <= 3 && diffDays >= 0) {
+            const alertMessage = `${item.item} will be expiring in ${diffDays} days. Exp. Date is ${item.expirationDate}`;
+            const alertElement = document.createElement('p');
+            alertElement.textContent = alertMessage;
+            alertsContainer.appendChild(alertElement);
+        }
+    });
+}
+
 // Clear the table and items
 function clearTable() {
     items = [];
     displayItems(items);
+    document.getElementById('alerts-container').innerHTML = ''; // Clear alerts when clearing the table
 }
 
 // Search and filter items
@@ -114,7 +137,9 @@ function importFromCSV(event) {
             return { unit, shelf, item, quantity, dateAdded, expirationDate };
         });
         displayItems(items);
+        checkForExpiringItems(); // Check for expiring items after import
     };
 
     reader.readAsText(file);
 }
+
