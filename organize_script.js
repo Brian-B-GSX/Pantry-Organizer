@@ -137,9 +137,31 @@ function importFromCSV(event) {
             return { unit, shelf, item, quantity, dateAdded, expirationDate };
         });
         displayItems(items);
-        checkForExpiringItems(); // Check for expiring items after import
+        checkForExpiringItems();
     };
 
     reader.readAsText(file);
 }
 
+// Dark Mode
+function toggleDarkMode() {
+    const body = document.body;
+    const isDarkMode = body.classList.toggle('dark-mode');
+
+    // Apply the dark mode class to all relevant sections
+    document.getElementById('form-section').classList.toggle('dark-mode');
+    document.getElementById('table-container').classList.toggle('dark-mode');
+    document.getElementById('alerts-section').classList.toggle('dark-mode');
+    document.querySelectorAll('th').forEach(th => th.classList.toggle('dark-mode'));
+    document.querySelectorAll('button').forEach(button => button.classList.toggle('dark-mode'));
+
+    // Save preference to localStorage
+    localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+}
+
+// Check and apply saved theme on page load
+window.onload = function() {
+    if (localStorage.getItem('darkMode') === 'enabled') {
+        toggleDarkMode();
+    }
+};

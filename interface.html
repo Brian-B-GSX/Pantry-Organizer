@@ -9,6 +9,7 @@
 <body>
     <header>
         <h1>SmartShelf</h1>
+        <button id="theme-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
     </header>
 
     <main>
@@ -70,6 +71,9 @@
             <div id="table-container"></div>
         </section>
 
+        <!-- Recipe Suggestions Button -->
+        <button id="recipe-suggestions-btn" onclick="openRecipeSelector()">Get Recipe Suggestions</button>
+
         <!-- Bottom Buttons -->
         <div id="bottom-buttons">
             <input type="file" id="import-file" accept=".csv" onchange="importFromCSV(event)">
@@ -78,6 +82,15 @@
         </div>
     </main>
 
+    <!-- Recipe Selection Modal -->
+    <div id="recipe-modal" style="display: none;">
+        <h2>Select Ingredients for Recipe Suggestions</h2>
+        <div id="ingredient-options"></div>
+        <button onclick="searchForRecipes()">Search Recipes</button>
+        <button onclick="closeRecipeModal()">Close</button>
+    </div>
+
     <script src="organize_script.js"></script>
+    <script src="recipe_script.js"></script>
 </body>
 </html>
