@@ -1,6 +1,34 @@
 // Array to store items
 let items = [];
 
+// Add an item to the shelf and to the items array
+function addItem() {
+    const itemName = document.getElementById('item').value;
+    const itemQuantity = document.getElementById('quantity').value;
+    const itemShelf = document.getElementById('shelf').value;
+    const itemUnit = document.getElementById('unit').value;
+    const itemDateAdded = document.getElementById('dateAdded').value;
+    const itemExpirationDate = document.getElementById('expirationDate').value;
+
+    const item = {
+        item: itemName,
+        quantity: itemQuantity,
+        shelf: itemShelf,
+        unit: itemUnit,
+        dateAdded: itemDateAdded,
+        expirationDate: itemExpirationDate
+    };
+
+    // Add item to the items array
+    items.push(item);
+    
+    // Log items for debugging
+    console.log('Items Array:', items);
+
+    // Reset the form after adding
+    document.getElementById('item-form').reset();
+}
+
 // Open the recipe selection modal
 function openRecipeSelector() {
     const modal = document.getElementById('recipe-modal');
@@ -38,6 +66,8 @@ function searchForRecipes() {
 
     if (selectedIngredients.length > 0) {
         const query = `https://www.google.com/search?q=recipes+with+${selectedIngredients.join('+')}`;
+        // Log the query for debugging
+        console.log('Search Query:', query);
         window.open(query, '_blank');  // Open search results in a new tab
     } else {
         alert("Please select at least one ingredient!");
@@ -49,27 +79,8 @@ function closeRecipeModal() {
     document.getElementById('recipe-modal').style.display = 'none';
 }
 
-// Add an item to the shelf and to the items array
-function addItem() {
-    const itemName = document.getElementById('item').value;
-    const itemQuantity = document.getElementById('quantity').value;
-    const itemShelf = document.getElementById('shelf').value;
-    const itemUnit = document.getElementById('unit').value;
-    const itemDateAdded = document.getElementById('dateAdded').value;
-    const itemExpirationDate = document.getElementById('expirationDate').value;
+// Ensure the code runs after the DOM has fully loaded
+document.addEventListener("DOMContentLoaded", function() {
+    // Add your initialization code here if needed
+});
 
-    const item = {
-        item: itemName,
-        quantity: itemQuantity,
-        shelf: itemShelf,
-        unit: itemUnit,
-        dateAdded: itemDateAdded,
-        expirationDate: itemExpirationDate
-    };
-
-    // Add item to the items array
-    items.push(item);
-
-    // Reset the form after adding
-    document.getElementById('item-form').reset();
-}

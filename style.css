@@ -191,29 +191,3 @@ button.dark-mode:hover, #bottom-buttons button.dark-mode:hover {
 #alerts-section.dark-mode {
     background-color: #660000;
 }
-
-/* Recipe Modal Styles */
-#recipe-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-}
-
-#recipe-modal h2 {
-    margin: 0;
-    margin-bottom: 10px;
-}
-
-#ingredient-options {
-    margin-bottom: 10px;
-}
-
-#recipe-modal button {
-    margin-right: 5px;
-}

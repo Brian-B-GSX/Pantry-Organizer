@@ -23,9 +23,16 @@ function addItem() {
         items.push(newItem);
         displayItems(items);
         checkForExpiringItems();
+        updateItemCount(); // Update item count when a new item is added
     } else {
         alert("Please fill in all fields");
     }
+}
+
+// Update item count display
+function updateItemCount() {
+    const itemCountElement = document.getElementById('item-count');
+    itemCountElement.innerText = `Total Items: ${items.length}`; // Update the text with the current count
 }
 
 // Display items in the table
@@ -91,6 +98,7 @@ function clearTable() {
     items = [];
     displayItems(items);
     document.getElementById('alerts-container').innerHTML = ''; // Clear alerts when clearing the table
+    updateItemCount(); // Update item count after clearing the table
 }
 
 // Search and filter items
@@ -138,6 +146,7 @@ function importFromCSV(event) {
         });
         displayItems(items);
         checkForExpiringItems();
+        updateItemCount(); // Update item count after importing
     };
 
     reader.readAsText(file);
@@ -165,3 +174,17 @@ window.onload = function() {
         toggleDarkMode();
     }
 };
+
+// Print the items in the list
+function printItemList() {
+    const printContent = document.getElementById('table-container').innerHTML;
+    const newWindow = window.open('', '', 'width=600,height=400');
+    newWindow.document.write(`
+        <html>
+            <head><title>Print Items</title></head>
+            <body>${printContent}</body>
+        </html>
+    `);
+    newWindow.document.close();
+    newWindow.print();
+}

@@ -61,6 +61,7 @@
         <!-- Alerts Section -->
         <section id="alerts-section">
             <h2>Alerts</h2>
+            <p id="item-count">Total Items: 0</p>
             <div id="alerts-container"></div>
         </section>
 
@@ -79,16 +80,9 @@
             <input type="file" id="import-file" accept=".csv" onchange="importFromCSV(event)">
             <button onclick="exportToCSV()">Export to CSV</button>
             <button onclick="clearTable()">Clear Table</button>
+            <button onclick="printItemList()">Print Item List</button>
         </div>
     </main>
-
-    <!-- Recipe Selection Modal -->
-    <div id="recipe-modal" style="display: none;">
-        <h2>Select Ingredients for Recipe Suggestions</h2>
-        <div id="ingredient-options"></div>
-        <button onclick="searchForRecipes()">Search Recipes</button>
-        <button onclick="closeRecipeModal()">Close</button>
-    </div>
 
     <script src="organize_script.js"></script>
 </body>
