@@ -8,36 +8,54 @@
 </head>
 <body>
     <header>
-        <h1>SmartShelf</h1>
+        <h1 id="app-title">SmartShelf</h1>
+        <div id="navigation-buttons">
+            <button class="nav-button" onclick="location.href='interface.html'">My Pantry</button>
+            <button class="nav-button" onclick="location.href='shopping_list.html'">My Shopping List</button>
+            <button class="nav-button" onclick="location.href='alerts.html'">Alerts & Reminders</button>
+        </div>
         <button id="theme-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
     </header>
 
     <main>
         <!-- Form Section -->
         <section id="form-section">
+            <h2>Add Item</h2>
             <form id="item-form">
-                <label for="unit">Primary Unit:</label>
-                <select id="unit">
-                    <option value="Fridge">Fridge</option>
-                    <option value="Cabinet">Cabinet</option>
-                    <option value="Pantry">Pantry</option>
-                    <option value="Drawer">Drawer</option>
-                </select>
+                <div class="input-group">
+                    <label for="unit">Primary Unit:</label>
+                    <select id="unit">
+                        <option value="Fridge">Fridge</option>
+                        <option value="Cabinet">Cabinet</option>
+                        <option value="Pantry">Pantry</option>
+                        <option value="Drawer">Drawer</option>
+                    </select>
+                </div>
 
-                <label for="shelf">Shelf:</label>
-                <input type="text" id="shelf" placeholder="Enter shelf location">
+                <div class="input-group">
+                    <label for="shelf">Shelf:</label>
+                    <input type="text" id="shelf" placeholder="Enter shelf location">
+                </div>
 
-                <label for="item">Item:</label>
-                <input type="text" id="item" placeholder="Enter item name">
+                <div class="input-group">
+                    <label for="item">Item:</label>
+                    <input type="text" id="item" placeholder="Enter item name">
+                </div>
 
-                <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" placeholder="Enter quantity">
+                <div class="input-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" placeholder="Enter quantity">
+                </div>
 
-                <label for="dateAdded">Date Added:</label>
-                <input type="date" id="dateAdded">
+                <div class="input-group">
+                    <label for="dateAdded">Date Added:</label>
+                    <input type="date" id="dateAdded">
+                </div>
 
-                <label for="expirationDate">Expiration Date:</label>
-                <input type="date" id="expirationDate">
+                <div class="input-group">
+                    <label for="expirationDate">Expiration Date:</label>
+                    <input type="date" id="expirationDate">
+                </div>
 
                 <button type="button" onclick="addItem()">Add Item</button>
             </form>
@@ -45,17 +63,22 @@
 
         <!-- Search and Filter Section -->
         <section id="filter-section">
-            <label for="search">Search by Item:</label>
-            <input type="text" id="search" placeholder="Search item..." onkeyup="filterItems()">
+            <h2>Search and Filter</h2>
+            <div class="input-group">
+                <label for="search">Search by Item:</label>
+                <input type="text" id="search" placeholder="Search item..." onkeyup="filterItems()">
+            </div>
 
-            <label for="unitFilter">Filter by Unit:</label>
-            <select id="unitFilter" onchange="filterItems()">
-                <option value="all">All Units</option>
-                <option value="Fridge">Fridge</option>
-                <option value="Cabinet">Cabinet</option>
-                <option value="Pantry">Pantry</option>
-                <option value="Drawer">Drawer</option>
-            </select>
+            <div class="input-group">
+                <label for="unitFilter">Filter by Unit:</label>
+                <select id="unitFilter" onchange="filterItems()">
+                    <option value="all">All Units</option>
+                    <option value="Fridge">Fridge</option>
+                    <option value="Cabinet">Cabinet</option>
+                    <option value="Pantry">Pantry</option>
+                    <option value="Drawer">Drawer</option>
+                </select>
+            </div>
         </section>
 
         <!-- Alerts Section -->
@@ -73,7 +96,7 @@
         </section>
 
         <!-- Recipe Suggestions Button -->
-        <button id="recipe-suggestions-btn" onclick="openRecipeSelector()">Get Recipe Suggestions</button>
+        <button id="get-recipe-suggestions" onclick="searchGoogle()">Get Recipe Suggestions</button>
 
         <!-- Bottom Buttons -->
         <div id="bottom-buttons">

@@ -1,5 +1,6 @@
+// AI helped with writing the JS code
 // Array to hold all items
-let items = [];
+let items = JSON.parse(localStorage.getItem('items')) || []; // Load items from localStorage if available
 
 // Add item to the table and list
 function addItem() {
@@ -10,23 +11,50 @@ function addItem() {
     const dateAdded = document.getElementById('dateAdded').value;
     const expirationDate = document.getElementById('expirationDate').value;
 
-    if (unit && shelf && item && quantity && dateAdded && expirationDate) {
-        const newItem = {
-            unit,
-            shelf,
-            item,
-            quantity,
-            dateAdded,
-            expirationDate
-        };
-
-        items.push(newItem);
-        displayItems(items);
-        checkForExpiringItems();
-        updateItemCount(); // Update item count when a new item is added
-    } else {
+    // Form validation - check that all fields are filled and expiration date is valid
+    if (!unit || !shelf || !item || !quantity || !dateAdded || !expirationDate) {
         alert("Please fill in all fields");
+        return;
     }
+
+    if (!validateDates(dateAdded, expirationDate)) {
+        alert("Expiration date must be later than the date added.");
+        return;
+    }
+
+    // Create a new item object
+    const newItem = {
+        unit,
+        shelf,
+        item,
+        quantity,
+        dateAdded,
+        expirationDate
+    };
+
+    items.push(newItem);
+    displayItems(items);
+    checkForExpiringItems();
+    updateItemCount(); // Update item count when a new item is added
+    saveItems(); // Save items to localStorage
+    clearForm(); // Clear the form inputs after adding
+}
+
+// Form validation: check if expiration date is later than the date added
+function validateDates(dateAdded, expirationDate) {
+    const addedDate = new Date(dateAdded);
+    const expDate = new Date(expirationDate);
+    return expDate > addedDate;
+}
+
+// Clear the form after adding an item
+function clearForm() {
+    document.getElementById('unit').value = '';
+    document.getElementById('shelf').value = '';
+    document.getElementById('item').value = '';
+    document.getElementById('quantity').value = '';
+    document.getElementById('dateAdded').value = '';
+    document.getElementById('expirationDate').value = '';
 }
 
 // Update item count display
@@ -52,10 +80,11 @@ function displayItems(filteredItems) {
             <th>Quantity</th>
             <th>Date Added</th>
             <th>Expiration Date</th>
+            <th>Action</th>
         </tr>
     `;
 
-    filteredItems.forEach((item) => {
+    filteredItems.forEach((item, index) => {
         tableHTML += `
             <tr>
                 <td>${item.unit}</td>
@@ -64,6 +93,7 @@ function displayItems(filteredItems) {
                 <td>${item.quantity}</td>
                 <td>${item.dateAdded}</td>
                 <td>${item.expirationDate}</td>
+                <td><button onclick="removeItem(${index})">Remove</button></td>
             </tr>
         `;
     });
@@ -93,12 +123,22 @@ function checkForExpiringItems() {
     });
 }
 
+// Remove an item from the list and update the display
+function removeItem(index) {
+    items.splice(index, 1);
+    displayItems(items);
+    checkForExpiringItems();
+    updateItemCount();
+    saveItems(); // Save updated items to localStorage
+}
+
 // Clear the table and items
 function clearTable() {
     items = [];
     displayItems(items);
     document.getElementById('alerts-container').innerHTML = ''; // Clear alerts when clearing the table
     updateItemCount(); // Update item count after clearing the table
+    saveItems(); // Save empty state to localStorage
 }
 
 // Search and filter items
@@ -116,9 +156,26 @@ function filterItems() {
     displayItems(filteredItems);
 }
 
+// Save items to localStorage
+function saveItems() {
+    localStorage.setItem('items', JSON.stringify(items));
+}
+
+// Google Search for Recipes Based on Items
+function searchGoogle() {
+    const pantryItems = items.map(item => item.item).join(' and '); // Join items with " and "
+    if (pantryItems) {
+        const searchQuery = `recipes including ${encodeURIComponent(pantryItems)}`; // Construct the search query
+        const googleSearchURL = `https://www.google.com/search?q=${searchQuery}`; // Create Google search URL
+        window.open(googleSearchURL, '_blank'); // Open the search in a new tab
+    } else {
+        alert("You need to add items to your list before searching for recipes.");
+    }
+}
+
 // CSV Export
 function exportToCSV() {
-    const csvContent = items.map(item => 
+    const csvContent = items.map(item =>
         `${item.unit},${item.shelf},${item.item},${item.quantity},${item.dateAdded},${item.expirationDate}`
     ).join('\n');
 
@@ -147,6 +204,7 @@ function importFromCSV(event) {
         displayItems(items);
         checkForExpiringItems();
         updateItemCount(); // Update item count after importing
+        saveItems(); // Save imported items to localStorage
     };
 
     reader.readAsText(file);
@@ -173,6 +231,11 @@ window.onload = function() {
     if (localStorage.getItem('darkMode') === 'enabled') {
         toggleDarkMode();
     }
+
+    // Load saved items and display them
+    displayItems(items);
+    checkForExpiringItems();
+    updateItemCount();
 };
 
 // Print the items in the list

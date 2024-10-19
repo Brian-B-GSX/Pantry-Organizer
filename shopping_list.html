@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shopping List - SmartShelf</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 id="app-title">SmartShelf</h1>
+        <div id="navigation-buttons">
+            <button class="nav-button" onclick="location.href='interface.html'">My Pantry</button>
+            <button class="nav-button" onclick="location.href='shopping_list.html'">My Shopping List</button>
+            <button class="nav-button" onclick="location.href='alerts.html'">Alerts & Reminders</button>
+        </div>
+        <button id="theme-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </header>
+
+    <main>
+        <section id="shopping-list-section">
+            <h2>Shopping List</h2>
+            <form id="shopping-form">
+                <div class="input-group">
+                    <label for="shopping-item">Item to Buy:</label>
+                    <input type="text" id="shopping-item" placeholder="Enter item name">
+                </div>
+                <button type="button" onclick="addShoppingItem()">Add to List</button>
+            </form>
+
+            <h3>Current List:</h3>
+            <ul id="shopping-list">
+                <!-- Shopping items will be added here dynamically -->
+            </ul>
+        </section>
+
+        <div id="bottom-buttons">
+            <button onclick="clearShoppingList()">Clear Shopping List</button>
+            <button onclick="printShoppingList()">Print Shopping List</button>
+        </div>
+    </main>
+
+    <script src="shopping_list_script.js"></script>
+</body>
+</html>

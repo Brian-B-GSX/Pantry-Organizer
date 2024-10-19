@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alerts and Reminders - SmartShelf</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1 id="app-title">SmartShelf</h1>
+        <div id="navigation-buttons">
+            <button class="nav-button" onclick="location.href='interface.html'">My Pantry</button>
+            <button class="nav-button" onclick="location.href='shopping_list.html'">My Shopping List</button>
+            <button class="nav-button" onclick="location.href='alerts.html'">Alerts & Reminders</button>
+        </div>
+        <button id="theme-toggle" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+    </header>
+
+    <main>
+        <section id="alerts-reminders-section">
+            <h2>Alerts and Reminders</h2>
+            <form id="reminder-form">
+                <div class="input-group">
+                    <label for="reminderText">Reminder:</label>
+                    <input type="text" id="reminderText" placeholder="Enter reminder text">
+                </div>
+
+                <div class="input-group">
+                    <label for="reminderDate">Date:</label>
+                    <input type="date" id="reminderDate">
+                </div>
+
+                <button type="button" onclick="addReminder()">Add Reminder</button>
+            </form>
+
+            <h3>Your Reminders:</h3>
+            <div id="reminders-container"></div>
+        </section>
+    </main>
+
+    <script src="alerts_script.js"></script>
+</body>
+</html>

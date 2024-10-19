@@ -1,0 +1,116 @@
+/* General Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    justify-content: flex-start;
+    min-height: 100vh;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+/* Header Styling */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+/* Header Options */
+.header-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Button Styling */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Shopping List Section */
+#shopping-list-section {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Elements Styling */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select {
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+/* Shopping List Items */
+ul#shopping-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul#shopping-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+#bottom-buttons {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+/* Dark Mode Styles */
+body.dark-mode,
+header.dark-mode,
+#shopping-list-section.dark-mode {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+.dark-mode button {
+    background-color: #888;
+}
+
+.dark-mode button:hover {
+    background-color: #666;
+}
+
+/* Center headers */
+h2 {
+    text-align: center; /* Center the header text */
+}
+
