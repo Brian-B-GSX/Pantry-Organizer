@@ -1,14 +1,18 @@
+// Function to add reminders with local storage
 function addReminder() {
     const reminderText = document.getElementById('reminderText').value;
     const reminderDate = document.getElementById('reminderDate').value;
     
     if (reminderText && reminderDate) {
-        const reminderContainer = document.getElementById('reminders-container');
-        const reminderItem = document.createElement('div');
-        reminderItem.className = 'reminder-item';
-        reminderItem.textContent = `${reminderText} - ${reminderDate}`;
+        const reminderItem = `${reminderText} - ${reminderDate}`;
         
-        reminderContainer.appendChild(reminderItem);
+        // Add reminder to localStorage
+        let reminders = JSON.parse(localStorage.getItem('reminders')) || [];
+        reminders.push(reminderItem);
+        localStorage.setItem('reminders', JSON.stringify(reminders));
+        
+        // Update the UI
+        updateReminders();
         
         // Clear input fields
         document.getElementById('reminderText').value = '';
@@ -17,6 +21,26 @@ function addReminder() {
         alert("Please fill out both fields.");
     }
 }
+
+// Function to update reminders on the page
+function updateReminders() {
+    const reminderContainer = document.getElementById('reminders-container');
+    reminderContainer.innerHTML = ''; // Clear current reminders
+
+    const reminders = JSON.parse(localStorage.getItem('reminders')) || [];
+
+    reminders.forEach(reminder => {
+        const reminderItem = document.createElement('div');
+        reminderItem.className = 'reminder-item';
+        reminderItem.textContent = reminder;
+        reminderContainer.appendChild(reminderItem);
+    });
+}
+
+// Load reminders when the page loads
+window.onload = function() {
+    updateReminders();
+};
 
 // Dark mode toggle function
 function toggleDarkMode() {

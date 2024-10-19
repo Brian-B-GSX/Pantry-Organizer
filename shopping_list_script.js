@@ -1,5 +1,5 @@
-// AI helped with writing the JS code
-let shoppingList = [];
+// Initialize shopping list from local storage
+let shoppingList = JSON.parse(localStorage.getItem('shoppingList')) || [];
 
 function addShoppingItem() {
     const itemInput = document.getElementById('shopping-item');
@@ -7,6 +7,7 @@ function addShoppingItem() {
 
     if (itemName) {
         shoppingList.push(itemName);
+        localStorage.setItem('shoppingList', JSON.stringify(shoppingList)); // Save to local storage
         itemInput.value = '';
         updateShoppingList();
     } else {
@@ -27,6 +28,7 @@ function updateShoppingList() {
 
 function clearShoppingList() {
     shoppingList = [];
+    localStorage.setItem('shoppingList', JSON.stringify(shoppingList)); // Clear from local storage
     updateShoppingList();
 }
 
@@ -47,6 +49,12 @@ function printShoppingList() {
     printWindow.print();
 }
 
+// Load shopping list when the page loads
+window.onload = function() {
+    updateShoppingList();
+};
+
+// Dark mode toggle function
 function toggleDarkMode() {
     const body = document.body;
     const themeToggleButton = document.getElementById("theme-toggle");
