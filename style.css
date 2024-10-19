@@ -169,7 +169,7 @@ input, select {
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
-    margin: 0 10px; /* Add spacing between bottom buttons */
+    margin: 0 20px; /* Add spacing between bottom buttons */
 }
 
 #bottom-buttons button:hover {
