@@ -1,3 +1,4 @@
+// AI helped with this code
 // Function to add reminders with local storage
 function addReminder() {
     const reminderText = document.getElementById('reminderText').value;

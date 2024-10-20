@@ -1,3 +1,4 @@
+// AI helped with this code
 // Initialize shopping list from local storage
 let shoppingList = JSON.parse(localStorage.getItem('shoppingList')) || [];
 
