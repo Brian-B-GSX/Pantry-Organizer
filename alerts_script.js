@@ -37,6 +37,15 @@ function updateReminders() {
     });
 }
 
+// Function to clear all reminders
+function clearReminders() {
+    // Clear reminders from localStorage
+    localStorage.removeItem('reminders');
+    
+    // Update the UI to reflect no reminders
+    updateReminders();
+}
+
 // Load reminders when the page loads
 window.onload = function() {
     updateReminders();
